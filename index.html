@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Year Countdown</title>
+</head>
+<body>
+	<span id="days"></span> Days
+	<span id="hours"></span> Hours 
+	<span id="minutes"></span> Minutes
+	<span id="seconds"></span> Seconds
+
+	<script type="text/javascript">
+		const newYearDate = new Date("1 Jan " + (new Date().getFullYear() + 1));
+
+		let calculateTimeToNewYear = function() {
+			let diffSeconds = (newYearDate - new Date()) / 1000;
+			
+			document.getElementById("days").innerText    = Math.floor(diffSeconds / (3600 * 24));
+			document.getElementById("hours").innerText   = Math.floor(diffSeconds / (60 * 60)) % 24;
+			document.getElementById("minutes").innerText = Math.floor(diffSeconds / 60) % 60;
+			document.getElementById("seconds").innerText = Math.floor(diffSeconds) % 60;
+		}
+		
+		//initialize spans before timer
+		calculateTimeToNewYear();
+
+		let calculateDateTimer = setInterval(calculateTimeToNewYear, 1000);
+	</script>
+</body>
+</html>
