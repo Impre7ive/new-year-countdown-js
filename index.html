@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>New Year Countdown</title>
+	<meta charset="utf-8">
+	<title>New Year Countdown</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<span id="days"></span> Days
-	<span id="hours"></span> Hours 
-	<span id="minutes"></span> Minutes
-	<span id="seconds"></span> Seconds
+	<h1>New Year Countdown</h1>
+	<p>
+		<span id="days"></span> Days
+		<span id="hours"></span> Hours 
+		<span id="minutes"></span> Minutes
+		<span id="seconds"></span> Seconds
+	</p>
 
 	<script type="text/javascript">
 		const newYearDate = new Date("1 Jan " + (new Date().getFullYear() + 1));
 
-		let calculateTimeToNewYear = function() {
+		function addZeroBeforeShortNumber(spans) {
+			spans.forEach(element => {
+				if(document.getElementById(element).innerText.length <= 1)
+					document.getElementById(element).innerText = 0 + document.getElementById(element).innerText;
+			});
+		}
+
+		function calculateTimeToNewYear() {
 			let diffSeconds = (newYearDate - new Date()) / 1000;
 			
 			document.getElementById("days").innerText    = Math.floor(diffSeconds / (3600 * 24));
 			document.getElementById("hours").innerText   = Math.floor(diffSeconds / (60 * 60)) % 24;
 			document.getElementById("minutes").innerText = Math.floor(diffSeconds / 60) % 60;
 			document.getElementById("seconds").innerText = Math.floor(diffSeconds) % 60;
+
+			addZeroBeforeShortNumber(["hours","minutes","seconds"]);
 		}
-		
+
 		//initialize spans before timer
 		calculateTimeToNewYear();
 
